@@ -38,6 +38,7 @@
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:c="http://www.springframework.org/schema/c"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:sec="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -51,6 +52,7 @@
        | interface supports plugging in another implementation, the default PolicyBasedAuthenticationManager should
        | be sufficient in most cases.
        +-->
+    <context:component-scan base-package="com.wuhanhongdev.cas"/>
     <bean id="authenticationManager" class="org.jasig.cas.authentication.PolicyBasedAuthenticationManager">
         <constructor-arg>
             <map>
@@ -102,13 +104,13 @@
        | * org.jasig.cas.adaptors.x509.authentication.handler.support.X509CredentialsAuthenticationHandler
        | * org.jasig.cas.support.spnego.authentication.handler.support.JCIFSSpnegoAuthenticationHandler
        -->
-    <bean id="primaryAuthenticationHandler"
-          class="org.jasig.cas.authentication.AcceptUsersAuthenticationHandler">
-        <property name="users">
+    <!--<bean id="primaryAuthenticationHandler" class="org.jasig.cas.authentication.AcceptUsersAuthenticationHandler">-->
+    <bean id="primaryAuthenticationHandler" class="com.wuhanhongdev.cas.UserAuthenticationHandler">
+        <!--<property name="users">
             <map>
                 <entry key="casuser" value="Mellon"/>
             </map>
-        </property>
+        </property>-->
     </bean>
 
     <!-- Required for proxy ticket mechanism -->
